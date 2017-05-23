@@ -13,33 +13,33 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <nav>
-            <ul>
-                <li><a href="lister_hotels">Hotels</a></li>
-                <li><a href="lister_chambres">Chambres</a></li>
-            </ul>
-        </nav>
+        <c:import url="menu"></c:import>
         <a href="ajouter_chambre">Ajouter une chambre</a>
         <h1>${leTitre}</h1>
-        <table style=" border-collapse: collapse;">
+        <table style=" border-collapse: collapse">
             <thead >
                 <tr>
-                    <th style= "border: 1px black solid;">Id</th>
-                    <th style= "border: 1px black solid;">Nom</th>
-                    <th style= "border: 1px black solid;">Numéro</th>
-                    <th style= "border: 1px black solid;">Prix</th>
+                    <th style=" border: 1px black solid;">Id</th>
+                    <th style=" border: 1px black solid;">Nom</th>
+                    <th style=" border: 1px black solid;">Numéro</th>
+                    <th style=" border: 1px black solid;">Prix</th>
+                    <th style=" border: 1px black solid;">Hotel</th>
+                    <th style=" border: 1px black solid;">Action</th>
                 </tr>
             </thead>
             <tbody>
                 <c:forEach items="${listeChambres}" var="ch">
-                    <tr>
-                        <td style= "border: 1px black solid;">${ch.id}</td>
-                        <td style= "border: 1px black solid;">${ch.nom}</td>
-                        <td style= "border: 1px black solid;">${ch.numero}</td>
-                        <td style= "border: 1px black solid;">${ch.prix}</td>
+                    <tr >
+                        <td style=" border: 1px black solid;">${ch.id}</td>
+                        <td style=" border: 1px black solid;">${ch.nom}</td>
+                        <td style=" border: 1px black solid;">${ch.numero}</td>
+                        <td  style=" border: 1px black solid;">${ch.prix}</td>
+                        <td style=" border: 1px black solid;">${ch.hotel.nom}</td>
+                        <td style=" border: 1px black solid;"><a href="supprimer_chambre?chambreId=${ch.id}">Supprimer</a></td>
                     </tr>
                 </c:forEach>
             </tbody>
         </table>
+        <c:import url="_footer"></c:import>
     </body>
 </html>

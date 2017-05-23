@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -25,6 +27,18 @@ public class Chambre implements Serializable {
     private String nom;
     private Long numero;
     private Double prix;
+    
+    @ManyToOne
+    @JoinColumn(name="hotel_id")
+    private Hotel hotel;
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
 
     public Double getPrix() {
         return prix;

@@ -38,8 +38,7 @@ public class AjoutHotelServlet extends HttpServlet {
         
         HotelService service = new HotelService();
         service.ajouter(h);
-//        ListerHotelsServlet lhs = new ListerHotelsServlet();
-//        lhs.doGet(req, resp);
+
         resp.sendRedirect("lister_hotels");
         
     }

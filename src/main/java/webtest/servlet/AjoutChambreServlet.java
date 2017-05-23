@@ -6,14 +6,16 @@
 package webtest.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import webtest.entity.Chambre;
+import webtest.entity.Hotel;
 import webtest.service.ChambreService;
+import webtest.service.HotelService;
 
 /**
  *
@@ -24,7 +26,10 @@ public class AjoutChambreServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       req.getRequestDispatcher("ajouter_chambre.jsp").forward(req, resp);
+        HotelService hs = new HotelService();
+        List<Hotel> hotels = hs.lister();
+        req.setAttribute("listeHotels", hotels);
+        req.getRequestDispatcher("ajouter_chambre.jsp").forward(req, resp);
     }
 
     @Override
@@ -33,10 +38,15 @@ public class AjoutChambreServlet extends HttpServlet {
         ch.setNom(req.getParameter("nom"));
         ch.setNumero(Long.valueOf(req.getParameter("numero")));
         ch.setPrix(Double.valueOf(req.getParameter("prix")));
-        new ChambreService().ajouter(ch);
+       Long index = Long.valueOf(req.getParameter("hotels"));
+        HotelService hser = new HotelService();
+        Hotel h = hser.rechercher(index);
+        ch.setHotel(h);
+        h.getChambres().add(ch);
+       new ChambreService().ajouter(ch);
+        
+
         resp.sendRedirect("lister_chambres");
     }
-
-    
 
 }

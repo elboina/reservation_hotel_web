@@ -6,10 +6,13 @@
 package webtest.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -25,6 +28,16 @@ public class Hotel implements Serializable {
     private String nom;
     private String adresse;
     private Long codePostal;
+    @OneToMany(mappedBy = "hotel")
+    private List<Chambre> chambres = new ArrayList<>();
+
+    public List<Chambre> getChambres() {
+        return chambres;
+    }
+
+    public void setChambres(List<Chambre> chambres) {
+        this.chambres = chambres;
+    }
 
     public String getAdresse() {
         return adresse;

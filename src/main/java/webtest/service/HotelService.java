@@ -28,6 +28,25 @@ public class HotelService {
         em.getTransaction().commit();
     }
         
-            
+    public Hotel rechercher(Long id) {
+        EntityManager em = Persistence.createEntityManagerFactory("PU").createEntityManager();
+        return em.find(Hotel.class, id);
+    }  
+    
+   
+    
+    public void modifier(Hotel h) {
+        EntityManager em = Persistence.createEntityManagerFactory("PU").createEntityManager();
+        em.getTransaction().begin();
+        em.merge(h);
+        em.getTransaction().commit();
+    }
+    
+    public void supprimer(long id) {
+        EntityManager em = Persistence.createEntityManagerFactory("PU").createEntityManager();
+        em.getTransaction().begin();
+        em.remove(em.find(Hotel.class, id));
+        em.getTransaction().commit();
+    }
           
 }

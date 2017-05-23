@@ -26,4 +26,16 @@ public class ChambreService {
         EntityManager em = Persistence.createEntityManagerFactory("PU").createEntityManager();
         return em.createQuery("SELECT ch FROM Chambre ch ORDER BY ch.nom").getResultList();
     }
+    
+    public Chambre rechercher(long id) {
+        EntityManager em = Persistence.createEntityManagerFactory("PU").createEntityManager();
+        return em.find(Chambre.class, id);
+    }
+    
+    public void supprimer(long id) {
+        EntityManager em = Persistence.createEntityManagerFactory("PU").createEntityManager();
+        em.getTransaction().begin();
+        em.remove(em.find(Chambre.class, id));
+        em.getTransaction().commit();
+    }
 }

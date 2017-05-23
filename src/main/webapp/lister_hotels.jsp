@@ -15,12 +15,8 @@
     <body>
         <h1>${monTitre}</h1>
         
-        <nav>
-            <ul>
-                <li><a href="lister_hotels">Hotels</a></li>
-                <li><a href="lister_chambres">Chambres</a></li>
-            </ul>
-        </nav>
+        <c:import url="menu"></c:import>
+        
         <a href="ajout_hotel">Ajout d'un hotel</a>
         <table style="border-collapse: collapse">
             <thead>
@@ -28,6 +24,7 @@
             <th style="border: 1px solid black; ">Nom</th>
             <th style="border: 1px solid black;">Adresse</th>
             <th style="border: 1px solid black;">Code Postal</th>
+            <th style="border: 1px solid black;">Action</th>
             </thead>
             <tbody>
         <c:forEach items="${listeHotels}" var="h">
@@ -36,9 +33,12 @@
                 <td style="border: 1px solid black;">${h.nom}</td>
                 <td style="border: 1px solid black;">${h.adresse}</td>
                 <td style="border: 1px solid black;">${h.codePostal}</td>
+                <td style=" border: 1px black solid;"><a href="supprimer_hotel?Idhotel=${h.id}">Supprimer</a></td>
             </tr>
         </c:forEach>
             </tbody>
         </table>
+        <c:import url="_FOOTER.jsp"></c:import>
     </body>
+    
 </html>
