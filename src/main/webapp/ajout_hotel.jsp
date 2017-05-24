@@ -14,18 +14,40 @@
     </head>
     <body>
         <h1>Nouvel hotel</h1>
-    <c:import url="menu"></c:import>
-        <form method="POST">
-            <label>Nom hotel :</label>
-            <input type="text" name="nom" /><br>
-            <label>Adresse :</label>
-            <input type="text" name="adresse" /><br>
-            <label>Code postal :</label>
-            <input type="text" name="codePostal" /><br>
-            <input type="submit" value="Ajouter"/>
+        <c:import url="menu"></c:import>
+        
+        
+        <c:if test="${cookie['langue'].value == 'fr'}">
+            <form method="POST">
+                <label>Nom hotel :</label>
+                <input type="text" name="nom" /><br>
+                <label>Adresse :</label>
+                <input type="text" name="adresse" /><br>
+                <label>Code postal :</label>
+                <input type="text" name="codePostal" /><br>
+                <input type="submit" value="Ajouter"/>
+
+
+            </form>
+        </c:if>
+        <c:if test="${cookie['langue'].value == 'en'}">
+            <form method="POST">
+                <label>Hotel name :</label>
+                <input type="text" name="nom" /><br>
+                <label>Address :</label>
+                <input type="text" name="adresse" /><br>
+                <label>ZIPCode :</label>
+                <input type="text" name="codePostal" /><br>
+                <input type="submit" value="Ajouter"/>
+            </form>
+        </c:if>
+        
+
+
             
-            
-        </form>
+       
+
+
         <c:import url="_footer"></c:import>
     </body>
 </html>

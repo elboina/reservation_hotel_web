@@ -6,40 +6,31 @@
 package webtest.servlet;
 
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import webtest.entity.Hotel;
-import webtest.service.HotelService;
 
 /**
  *
  * @author formation
  */
-@WebServlet(name = "ListerHotelsServlet", urlPatterns = {"/lister_hotels"})
-public class ListerHotelsServlet extends HttpServlet {
+@WebServlet(name = "FRServlet", urlPatterns = {"/changer_langue"})
+public class ChangerLangueServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       //Récupère la liste des hotels à partir du service
-       
-       String titre = "Liste des hotels";
-       req.setAttribute("monTitre", titre);
-        HotelService hs = new HotelService();
-        List<Hotel> hotels = hs.lister();
         
-        req.setAttribute("listeHotels", hotels);
+        Cookie cookie = new Cookie("langue", req.getParameter("langue"));
+        cookie.setPath("/WebTest/");
+        resp.addCookie(cookie);
         
-       //Renvoie vers vue lister_hotels.jsp
-       req.getRequestDispatcher("lister_hotels.jsp").forward(req, resp);
+        resp.sendRedirect("lister_hotels");
     }
 
-   
-
-   
-       
+    
 
 }
